@@ -1,0 +1,116 @@
+task1:
+1.
+CREATE TABLE Authors (
+    Author_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100)
+);
+
+CREATE TABLE Books (
+    Book_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100),
+    Author_ID INT,
+    FOREIGN KEY (Author_ID) REFERENCES Authors(Author_ID)
+);
+
+2.sent as an image in the repo.
+
+3.
+Primary Key :
+its a main key of the table , does not allow to be null , does not allow to be redundant 
+
+Unique Constraint:
+its allow to be null , does not allow to be redundant.
+
+yes the table can contain both of primary key and unique constraint.
+
+
+task2:
+
+1.
+Customers
+
+| customer_id | customer_name |
+
+Orders
+
+| order_id | customer_id |
+
+Products
+
+| product_id | product_name | product_price |
+
+Order_Details
+
+| order_id | product_id |
+
+2.
+Partial dependency and transitive dependency are issues that happen in database tables when they are not normalized well. Partial dependency happens when a non-key attribute depends on only part of a composite primary key. For example in an Enrollment(student_id, course_id, student_name) table, the primary key is student_id and course_id together, but student_name depends only on student_id. This causes repetition of data and breaks 2NF. Transitive dependency is when a non-key attribute depends on another non-key attribute instead of directly on the primary key. For example in an Employee(emp_id, dept_id, dept_name) table, emp_id determines dept_id and dept_id determines dept_name, so dept_name depends on emp_id indirectly. This causes unnecessary data duplication and violates 3NF.
+
+task3:
+1.
+INSERT INTO students (student_id, name, date_of_birth, email)
+VALUES
+(1, 'Ali Hassan', '2001-05-12', 'ali@example.com'),
+(2, 'Sara Ahmed', '1999-11-03', 'sara@example.com'),
+(3, 'Omar Khaled', '2002-08-21', 'omar@example.com');
+
+2.
+SELECT *
+FROM students
+WHERE date_of_birth > '2000-01-01'
+ORDER BY name;
+
+3.
+
+UPDATE students
+SET email = 'newemail@example.com'
+WHERE student_id = 2;
+
+4.
+DELETE FROM students
+WHERE student_id = 3;
+
+
+task4:
+1.
+SELECT city, COUNT() AS user_count
+FROM users
+GROUP BY city
+HAVING COUNT() > 5;
+2.
+SELECT u.user_id, u.name
+FROM users u
+LEFT JOIN orders o
+  ON u.user_id = o.user_id
+WHERE o.order_id IS NULL;
+3.
+SELECT u.user_id, u.name, AVG(o.order_amount) AS avg_order_amount
+FROM users u
+JOIN orders o
+  ON u.user_id = o.user_id
+GROUP BY u.user_id, u.name;
+4.
+SELECT u.user_id, u.name, SUM(o.order_amount) AS total_spent
+FROM users u
+JOIN orders o
+  ON u.user_id = o.user_id
+GROUP BY u.user_id, u.name
+HAVING SUM(o.order_amount)
+(SELECT AVG(order_amount) FROM orders);
+5.
+SELECT email FROM users
+UNION
+SELECT email FROM newsletter_subscribers;
+
+task5:
+data is a raw data without processing.
+information is raw data with processing.
+data base is a structure that organizes data inside tables in order to ensure safety of data.
+dbms is a software that is used to make users on a single database manage the databses depending on the roles and restrictions of the roles given by the admin.
+rdbms are relational databases such as oracle and MySQL.
+
+a hospital uses the database system in order to log the data into the records of 
+the database where they will use the information that are provided to them by the patients like 
+their names and the information that is needed in order to log it into the system and make the
+ patient profile where they will be remembered through the data base in order to have a refrence if they ever visit the hospital again
+ and not have to go througt the logging their information process everytime they get into the hospital.
